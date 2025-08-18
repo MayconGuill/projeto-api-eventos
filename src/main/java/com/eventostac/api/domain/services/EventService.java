@@ -1,7 +1,9 @@
 package com.eventostac.api.domain.services;
 
 import com.amazonaws.services.s3.AmazonS3;
+import com.eventostac.api.domain.coupon.Coupon;
 import com.eventostac.api.domain.event.Event;
+import com.eventostac.api.domain.event.EventDetailsDTO;
 import com.eventostac.api.domain.event.EventRequestDTO;
 import com.eventostac.api.domain.event.EventResponseDTO;
 import com.eventostac.api.repositories.EventRepository;
@@ -16,10 +18,11 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
-import java.util.UUID;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class EventService {
@@ -31,7 +34,13 @@ public class EventService {
     private AmazonS3 s3Client;
 
     @Autowired
+    private AddressService addressService;
+
+    @Autowired
     private EventRepository repository;
+
+    @Autowired
+    private CouponService couponService;
 
     public Event createEvent(EventRequestDTO data) {
         String imgUrl = null;
@@ -50,13 +59,80 @@ public class EventService {
 
         repository.save(newEvent);
 
+        if(!data.remote()) {
+            this.addressService.createAddress(data, newEvent);
+        }
+
         return newEvent;
+    }
+
+    public EventDetailsDTO getEventDetails(UUID eventId) {
+        Event event = repository.findById(eventId)
+                .orElseThrow(() -> new IllegalArgumentException("Evento não encontrado."));
+
+        List<Coupon> coupons = this.couponService.consultCoupons(eventId, new Date());
+
+        List<EventDetailsDTO.CouponDTO> couponDTOs = coupons.stream()
+                .map(coupon -> new EventDetailsDTO.CouponDTO(
+                        coupon.getCode(),
+                        coupon.getDiscount(),
+                        coupon.getValid()))
+                .collect(Collectors.toList());
+
+        return new EventDetailsDTO(
+                event.getId(),
+                event.getTitle(),
+                event.getDescription(),
+                event.getDate(),
+                event.getAddress() != null ? event.getAddress().getCity() : "",
+                event.getAddress() != null ? event.getAddress().getUf() : "",
+                event.getImgUrl(),
+                event.getEventUrl(),
+                couponDTOs);
     }
 
     public List<EventResponseDTO> getUpcomingEvents(int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
         Page<Event> eventsPage = this.repository.findUpcomingEvents(new Date(), pageable);
-        return eventsPage.map(event -> new EventResponseDTO(event.getId(), event.getTitle(), event.getDescription(), event.getDate(), "", "", event.getRemote(), event.getEventUrl(), event.getImgUrl()))
+        return eventsPage.map(event -> new EventResponseDTO(
+                        event.getId(),
+                        event.getTitle(),
+                        event.getDescription(),
+                        event.getDate(),
+                        event.getAddress() != null ? event.getAddress().getCity() : "",
+                        event.getAddress() != null ? event.getAddress().getUf() : "",
+                        event.getRemote(),
+                        event.getEventUrl(),
+                        event.getImgUrl()))
+                .stream().toList();
+    }
+
+    public List<EventResponseDTO> getFilteredEvents(int page, int size, String title, String city, String uf, Date startDate, Date endDate) {
+        System.out.println("StartDate: " + startDate);
+        System.out.println("EndDate: " + endDate);
+        title = (title != null) ? title : "";
+        city = (city != null) ? city : "";
+        uf = (uf != null) ? uf : "";
+        startDate = (startDate != null) ? startDate : new Date();
+        if (endDate == null) {
+            LocalDate localDate = LocalDate.now().plusYears(10);
+            endDate = Date.from(localDate.atTime(LocalTime.MAX).atZone(ZoneId.systemDefault()).toInstant());
+        }
+        System.out.println("StartDate2: " + startDate);
+        System.out.println("EndDate2: " + endDate);
+
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Event> eventsPage = this.repository.findFilteredEvents(title, city, uf, startDate, endDate, pageable);
+        return eventsPage.map(event -> new EventResponseDTO(
+                        event.getId(),
+                        event.getTitle(),
+                        event.getDescription(),
+                        event.getDate(),
+                        event.getAddress() != null ? event.getAddress().getCity() : "",
+                        event.getAddress() != null ? event.getAddress().getUf() : "",
+                        event.getRemote(),
+                        event.getEventUrl(),
+                        event.getImgUrl()))
                 .stream().toList();
     }
 
