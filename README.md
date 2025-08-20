@@ -30,13 +30,21 @@ O objetivo principal é o aprendizado e prática de:
 `POST /api/event`
 
 Envio via `multipart/form-data`, com os seguintes campos:
+
 `title` (obrigatório)
+
 `description` (opcional)
+
 `eventUrl` (obrigatório)
+
 `image` (opcional - arquivo de imagem)
+
 `date` (obrigatório - formato Long)
+
 `remote` (booleano - obrigatório)
+
 `city` (obrigatório)
+
 `state` (obrigatório)
 ### 🎟️ Cupons
 - Criar cupom para um evento
