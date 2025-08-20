@@ -67,6 +67,23 @@ Você pode testar a API utilizando ferramentas como:
 - [Postman](https://www.postman.com/)
 - [Insomnia](https://insomnia.rest/)
 
+# Como executar o projeto
+
+```bash
+# 1. Clonar repositório
+git clone https://github.com/MayconGuill/projeto-api-eventos.git
+
+# 2. Entrar na pasta do projeto back end
+cd projeto-api-eventos
+
+# 3. Configure o banco de dados
+Crie um banco de dados no PostgreSQL com o nome desejado (ex: `eventos_db`) e configure as credenciais no arquivo:
+src/main/resources/application.properties
+
+# 4. executar o projeto
+./mvnw spring-boot:run
+```
+
 # Autor
 
 Maycon Vieira Guill Rodrigues
