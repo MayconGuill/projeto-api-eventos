@@ -28,6 +28,7 @@ O objetivo principal é o aprendizado e prática de:
 `GET /api/event/{eventId}`
 - Criar um novo evento
 `POST /api/event`
+
 Envio via `multipart/form-data`, com os seguintes campos:
 `title` (obrigatório)
 `description` (opcional)
