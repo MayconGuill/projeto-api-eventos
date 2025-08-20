@@ -1,5 +1,5 @@
 # Projeto Spring Boot - API REST de Eventos
-[![NPM](https://img.shields.io/npm/l/react)]
+[![NPM](https://img.shields.io/npm/l/react)](https://github.com/MayconGuill/projeto-api-eventos/blob/main/LICENSE)
 
 # 📋 Sobre o projeto
 Este projeto é uma aplicação back-end construída com Spring Boot, que disponibiliza uma API REST para gerenciamento de eventos.
