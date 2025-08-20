@@ -46,9 +46,9 @@ public class EventController {
     @GetMapping("/filter")
     public ResponseEntity<List<EventResponseDTO>> getFilteredEvents(@RequestParam(defaultValue = "0") int page,
                                                                     @RequestParam(defaultValue = "10") int size,
-                                                                    @RequestParam String title,
+                                                                    @RequestParam(required = false) String title,
                                                                     @RequestParam String city,
-                                                                    @RequestParam(required = false) String uf,
+                                                                    @RequestParam String uf,
                                                                     @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date startDate,
                                                                     @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date endDate) {
         List<EventResponseDTO> events = this.eventService.getFilteredEvents(page, size, title, city, uf, startDate, endDate);

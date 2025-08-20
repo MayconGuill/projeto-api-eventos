@@ -108,8 +108,6 @@ public class EventService {
     }
 
     public List<EventResponseDTO> getFilteredEvents(int page, int size, String title, String city, String uf, Date startDate, Date endDate) {
-        System.out.println("StartDate: " + startDate);
-        System.out.println("EndDate: " + endDate);
         title = (title != null) ? title : "";
         city = (city != null) ? city : "";
         uf = (uf != null) ? uf : "";
@@ -118,8 +116,6 @@ public class EventService {
             LocalDate localDate = LocalDate.now().plusYears(10);
             endDate = Date.from(localDate.atTime(LocalTime.MAX).atZone(ZoneId.systemDefault()).toInstant());
         }
-        System.out.println("StartDate2: " + startDate);
-        System.out.println("EndDate2: " + endDate);
 
         Pageable pageable = PageRequest.of(page, size);
         Page<Event> eventsPage = this.repository.findFilteredEvents(title, city, uf, startDate, endDate, pageable);

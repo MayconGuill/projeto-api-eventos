@@ -1,6 +1,7 @@
 package com.eventostac.api.domain.address;
 
 import com.eventostac.api.domain.event.Event;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,6 +26,7 @@ public class Address {
     private String uf;
 
     @OneToOne
+    @JsonIgnore
     @JoinColumn(name = "event_id")
     private Event event;
 }

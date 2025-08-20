@@ -1,12 +1,14 @@
 package com.eventostac.api.controllers;
 
 import com.eventostac.api.domain.coupon.Coupon;
+import com.eventostac.api.domain.coupon.CouponResponseDTO;
 import com.eventostac.api.domain.coupon.CouponRequestDTO;
 import com.eventostac.api.domain.services.CouponService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -20,5 +22,11 @@ public class CouponController {
     public ResponseEntity<Coupon> create(@PathVariable UUID eventId, @RequestBody CouponRequestDTO body) {
         Coupon coupons = couponService.createCouponToEvent(eventId, body);
         return ResponseEntity.ok(coupons);
+    }
+
+    @GetMapping("/{couponId}")
+    public ResponseEntity<CouponResponseDTO> getFilteredCoupon(@PathVariable UUID couponId) {
+        CouponResponseDTO couponResponseDTO = couponService.getFilteredCoupon(couponId);
+        return ResponseEntity.ok(couponResponseDTO);
     }
 }

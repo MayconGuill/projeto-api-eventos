@@ -2,6 +2,7 @@ package com.eventostac.api.domain.services;
 
 import com.eventostac.api.domain.coupon.Coupon;
 import com.eventostac.api.domain.coupon.CouponRequestDTO;
+import com.eventostac.api.domain.coupon.CouponResponseDTO;
 import com.eventostac.api.domain.event.Event;
 import com.eventostac.api.repositories.CouponRepository;
 import com.eventostac.api.repositories.EventRepository;
@@ -36,5 +37,17 @@ public class CouponService {
 
     public List<Coupon> consultCoupons(UUID eventId, Date currentDate) {
         return repository.findByEventIdAndValidAfter(eventId, currentDate);
+    }
+
+    public CouponResponseDTO getFilteredCoupon(UUID couponId) {
+        Coupon coupon = repository.findById(couponId)
+                .orElseThrow(() -> new IllegalArgumentException("Cupom não encontrado."));
+
+        return new CouponResponseDTO(
+                coupon.getId(),
+                coupon.getCode(),
+                coupon.getDiscount(),
+                coupon.getValid()
+        );
     }
 }
