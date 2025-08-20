@@ -49,10 +49,15 @@ Envio via `multipart/form-data`, com os seguintes campos:
 ### 🎟️ Cupons
 - Criar cupom para um evento
 `POST /api/coupon/event/{eventId}`
+
 Envio via `application/json`, com os campos:
+
 `code` (obrigatório)
+
 `discount` (obrigatório - percentual ou valor)
+
 `valid` (data de validade - obrigatório)
+
 - Buscar cupom por ID
 `GET /api/coupon/{couponId}`
 
