@@ -1,4 +1,4 @@
-package com.eventostac.api.domain.services;
+package com.eventostac.api.service;
 
 import com.eventostac.api.domain.address.Address;
 import com.eventostac.api.domain.event.Event;
