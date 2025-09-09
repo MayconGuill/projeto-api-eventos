@@ -1,6 +1,4 @@
-package com.eventostac.api.domain.event;
-
-import org.springframework.web.multipart.MultipartFile;
+package com.eventostac.api.dto.event;
 
 import java.util.Date;
 import java.util.UUID;

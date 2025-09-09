@@ -1,4 +1,4 @@
-package com.eventostac.api.repositories;
+package com.eventostac.api.repository;
 
 import com.eventostac.api.domain.event.Event;
 import org.springframework.data.domain.Page;

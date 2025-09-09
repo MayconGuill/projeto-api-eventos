@@ -1,11 +1,11 @@
 package com.eventostac.api.domain.services;
 
 import com.eventostac.api.domain.coupon.Coupon;
-import com.eventostac.api.domain.coupon.CouponRequestDTO;
-import com.eventostac.api.domain.coupon.CouponResponseDTO;
+import com.eventostac.api.dto.coupon.CouponRequestDTO;
+import com.eventostac.api.dto.coupon.CouponResponseDTO;
 import com.eventostac.api.domain.event.Event;
-import com.eventostac.api.repositories.CouponRepository;
-import com.eventostac.api.repositories.EventRepository;
+import com.eventostac.api.repository.CouponRepository;
+import com.eventostac.api.repository.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

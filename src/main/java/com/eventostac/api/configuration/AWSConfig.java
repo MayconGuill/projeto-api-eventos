@@ -1,4 +1,4 @@
-package com.eventostac.api.config;
+package com.eventostac.api.configuration;
 
 import com.amazonaws.auth.DefaultAWSCredentialsProviderChain;
 import com.amazonaws.services.s3.AmazonS3;

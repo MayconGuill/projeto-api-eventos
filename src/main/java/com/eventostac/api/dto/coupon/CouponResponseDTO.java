@@ -1,4 +1,4 @@
-package com.eventostac.api.domain.coupon;
+package com.eventostac.api.dto.coupon;
 
 import java.util.Date;
 import java.util.UUID;

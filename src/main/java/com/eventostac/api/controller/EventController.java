@@ -1,9 +1,9 @@
-package com.eventostac.api.controllers;
+package com.eventostac.api.controller;
 
 import com.eventostac.api.domain.event.Event;
-import com.eventostac.api.domain.event.EventDetailsDTO;
-import com.eventostac.api.domain.event.EventRequestDTO;
-import com.eventostac.api.domain.event.EventResponseDTO;
+import com.eventostac.api.dto.event.EventDetailsDTO;
+import com.eventostac.api.dto.event.EventRequestDTO;
+import com.eventostac.api.dto.event.EventResponseDTO;
 import com.eventostac.api.domain.services.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;

@@ -1,4 +1,4 @@
-package com.eventostac.api.domain.event;
+package com.eventostac.api.dto.event;
 
 import java.util.Date;
 import java.util.List;
