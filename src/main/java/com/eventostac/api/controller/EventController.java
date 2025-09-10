@@ -4,7 +4,7 @@ import com.eventostac.api.domain.event.Event;
 import com.eventostac.api.dto.event.EventDetailsDTO;
 import com.eventostac.api.dto.event.EventRequestDTO;
 import com.eventostac.api.dto.event.EventResponseDTO;
-import com.eventostac.api.domain.services.EventService;
+import com.eventostac.api.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;

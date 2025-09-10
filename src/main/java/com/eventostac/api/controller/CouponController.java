@@ -3,7 +3,7 @@ package com.eventostac.api.controller;
 import com.eventostac.api.domain.coupon.Coupon;
 import com.eventostac.api.dto.coupon.CouponResponseDTO;
 import com.eventostac.api.dto.coupon.CouponRequestDTO;
-import com.eventostac.api.domain.services.CouponService;
+import com.eventostac.api.service.CouponService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
