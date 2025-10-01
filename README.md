@@ -11,7 +11,7 @@ O objetivo principal é o aprendizado e prática de:
 - Aplicação de boas práticas de desenvolvimento de software
 
 ## 🚀 Tecnologias Utilizadas
-- Java 17
+- Java 21
 - Spring Boot
 - Spring Web
 - Spring Data JPA
